@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from posts.models import Group, Post
-from rest_framework import filters, permissions, viewsets
+from rest_framework import filters, mixins, permissions, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 
 from .permissions import IsAuthorOrReadOnly
@@ -50,11 +50,12 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
 
 
-class FollowViewSet(viewsets.ModelViewSet):
-    """Вьюсет для подписки."""
+class FollowViewSet(mixins.CreateModelMixin,
+                    mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
+    """Вьюсет для подписки. Разрешены только List и Create операции."""
     serializer_class = FollowSerializer
-    permission_classes = (IsAuthorOrReadOnly,
-                          permissions.IsAuthenticated)
+    permission_classes = (permissions.IsAuthenticated,)  # IsAuthorOrReadOnly здесь не нужен
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
 
