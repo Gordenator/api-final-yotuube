@@ -10,7 +10,7 @@ Python, Django, DRF, JWT + djoser
 
 Клонировать репозиторий и перейти в него в командной строке:
 ```bash
-git clone https://github.com/IlianL/api_final_yatube.git
+git clone https://github.com/Gordenator/api-final-yotuube
 cd api_final_yatube
 ```
 
@@ -261,7 +261,7 @@ python manage.py createsuperuser
 http://127.0.0.1:8000/admin
 ```
 
-Автор - [Илиан Ляпота](https://github.com/IlianL)
+
 
 
 
